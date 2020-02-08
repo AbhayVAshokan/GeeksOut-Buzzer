@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">672074866842-0h9ubnup4ccund7eg3a2qm8l5oroqbev.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://geeksout-buzzer.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">672074866842</string>
+    <string name="google_api_key" translatable="false">AIzaSyB8iCDrM2M_AmyRR9mCJpJbXBK3SYvIQTI</string>
+    <string name="google_app_id" translatable="false">1:672074866842:android:c71f344b28d755b668bf23</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB8iCDrM2M_AmyRR9mCJpJbXBK3SYvIQTI</string>
+    <string name="google_storage_bucket" translatable="false">geeksout-buzzer.appspot.com</string>
+    <string name="project_id" translatable="false">geeksout-buzzer</string>
+</resources>
