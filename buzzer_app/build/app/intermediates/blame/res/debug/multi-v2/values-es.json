@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/abhayvashokan/Productivity/Flutter/buzzer_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
+            "outputFile": "/home/abhayvashokan/Productivity/Projects/GeeksOut/buzzer_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
             "map": [
                 {
                     "source": "/home/abhayvashokan/.gradle/caches/transforms-2/files-2.1/57ed892f0235fd6c3c4ff0496ecbbdf9/play-services-base-17.0.0/res/values-es/values.xml",

@@ -41,7 +41,7 @@ class _ButtonState extends State<Button> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "GOOD LUCK " + widget.teamName,
+          "TEAM: " + widget.teamName,
           overflow: TextOverflow.fade,
         ),
         actions: <Widget>[
@@ -50,18 +50,23 @@ class _ButtonState extends State<Button> {
               onPressed: () => widget.showBottomNavigation(context)),
         ],
       ),
-      body: WillPopScope(
-          child: Center(
-            child: RaisedButton(
-              shape: CircleBorder(),
-              color: Colors.red,
-              child: Container(
-                height: MediaQuery.of(context).size.width * 0.95,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.black,
+        child: WillPopScope(
+            child: Center(
+              child: RaisedButton(
+                shape: CircleBorder(),
+                color: Color.fromRGBO(128, 0, 0, 1),
+                child: Container(
+                  height: MediaQuery.of(context).size.width * 0.95,
+                ),
+                onPressed: () {},
               ),
-              onPressed: () {},
             ),
-          ),
-          onWillPop: _onBackPressed),
+            onWillPop: _onBackPressed),
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.question_answer),
         onPressed: () => widget.showBottomNavigation(context),

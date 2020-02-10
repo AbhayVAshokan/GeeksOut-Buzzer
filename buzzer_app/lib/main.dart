@@ -7,7 +7,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );
@@ -52,30 +54,93 @@ class _HomeScreenState extends State<HomeScreen> {
         });
   }
 
+  Future<bool> _enterTeamName() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.black,
+            title: Text(
+              'ENTER GEEK NAME',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            content: TextField(
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(hintText: "Titanic Swim Team"),
+              controller: teamNameController,
+            ),
+            actions: <Widget>[
+              RaisedButton(
+                child: Text("Let's Rock"),
+                onPressed: () {
+                  _setTeamName(teamNameController, teamName, context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => new AlertDialog(
+          backgroundColor: Colors.black26,
+          title: new Text("ENTER TEAM NAME GEEK!"),
+          content: TextField(
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+                hintText: "Titanic Swim Team",
+                labelStyle: TextStyle(
+                  color: Colors.white,
+                )),
+            controller: teamNameController,
+          ),
+          actions: <Widget>[
+            RaisedButton(
+              child: Text("Let's Rock"),
+              onPressed: () {
+                _setTeamName(teamNameController, teamName, context);
+              },
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("BUZZER"),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.help), onPressed: () => _showBottomNavigation(context)),
-        ],
-      ),
-      body: Column(
-        children: <Widget>[
-          TextField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: "Enter team name"),
-              controller: teamNameController),
-          RaisedButton(
-            onPressed: () =>
-                _setTeamName(teamNameController, teamName, context),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("lib/assets/me_and_the_boys.jpeg"),
+            fit: BoxFit.cover,
           ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.question_answer),
-        onPressed: () => _showBottomNavigation(context),
+        ),
+        child: Center(
+            child: RaisedButton(
+                padding: EdgeInsets.all(10),
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  "PRESS HERE TO ENTER!",
+                  style: TextStyle(fontSize: 25),
+                ),
+                textColor: Colors.white,
+                onPressed: () {
+                  _enterTeamName();
+                })),
       ),
     );
   }
