@@ -54,66 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
   }
 
-  Future<bool> _enterTeamName() {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: Colors.black,
-            title: Text(
-              'ENTER GEEK NAME',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            content: TextField(
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: "Titanic Swim Team"),
-              controller: teamNameController,
-            ),
-            actions: <Widget>[
-              RaisedButton(
-                child: Text("Let's Rock"),
-                onPressed: () {
-                  _setTeamName(teamNameController, teamName, context);
-                },
-              ),
-            ],
-          );
-        });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => new AlertDialog(
-          backgroundColor: Colors.black26,
-          title: new Text("ENTER TEAM NAME GEEK!"),
-          content: TextField(
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-                hintText: "Titanic Swim Team",
-                labelStyle: TextStyle(
-                  color: Colors.white,
-                )),
-            controller: teamNameController,
-          ),
-          actions: <Widget>[
-            RaisedButton(
-              child: Text("Let's Rock"),
-              onPressed: () {
-                _setTeamName(teamNameController, teamName, context);
-              },
-            ),
-          ],
-        ),
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,21 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-            child: RaisedButton(
-                padding: EdgeInsets.all(10),
-                color: Theme.of(context).primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  "PRESS HERE TO ENTER!",
-                  style: TextStyle(fontSize: 25),
-                ),
-                textColor: Colors.white,
-                onPressed: () {
-                  _enterTeamName();
-                })),
       ),
     );
   }

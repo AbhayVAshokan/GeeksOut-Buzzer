@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Button extends StatefulWidget {
   final teamName;
@@ -11,6 +12,13 @@ class Button extends StatefulWidget {
 }
 
 class _ButtonState extends State<Button> {
+  final DatabaseReference database =
+      FirebaseDatabase.instance.reference().child('location');
+
+  sendData(String teamName) {
+    database.child('TeamName').set(teamName);
+  }
+
   Future<bool> _onBackPressed() {
     return showDialog(
         context: context,
@@ -62,7 +70,9 @@ class _ButtonState extends State<Button> {
                 child: Container(
                   height: MediaQuery.of(context).size.width * 0.95,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  sendData(widget.teamName);
+                },
               ),
             ),
             onWillPop: _onBackPressed),
