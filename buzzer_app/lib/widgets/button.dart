@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 class Button extends StatefulWidget {
   final teamName;
   final showBottomNavigation;
+  // final buzzerStatus;
 
   Button(this.teamName, this.showBottomNavigation);
 
@@ -12,11 +13,15 @@ class Button extends StatefulWidget {
 }
 
 class _ButtonState extends State<Button> {
-  final DatabaseReference database =
-      FirebaseDatabase.instance.reference().child('location');
+   final DatabaseReference database = FirebaseDatabase.instance.reference();
 
   sendData(String teamName) {
-    database.child('TeamName').set(teamName);
+    //   database.child('buzzerzStatus').once().then((DataSnapshot snapshot) {
+    // print('Data : ${snapshot.value}');
+  // });
+     database.child(teamName).set({
+    'time': DateTime.now().toString(),
+  });
   }
 
   Future<bool> _onBackPressed() {

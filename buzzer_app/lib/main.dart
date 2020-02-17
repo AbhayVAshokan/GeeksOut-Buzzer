@@ -50,14 +50,48 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _showBottomNavigation(context) {
     showModalBottomSheet(
+      backgroundColor: Colors.black38,
         context: context,
         builder: (_) {
           return Container(
             color: Colors.black26,
+            padding: EdgeInsets.all(1),
             child: Card(
               color: Colors.black12,
               elevation: 10,
-              child: Text("Hello World"),
+              child: Container(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      "RULES",
+                      style: GoogleFonts.raleway(
+                        fontSize: 40,
+                        color: Colors.yellow,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    ...rules.map((rule) {
+                      return Column(
+                        children: <Widget>[
+                          Text(
+                            rule,
+                            style: GoogleFonts.raleway(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      );
+                    }).toList()
+                  ],
+                ),
+              ),
             ),
           );
         });
@@ -99,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextField(
                     style: GoogleFonts.lato(
                       fontSize: 22,
-                      color: Color.fromRGBO(50,50, 50, 0.75),
+                      color: Color.fromRGBO(50, 50, 50, 0.75),
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(hintText: "Titanic Swim Team"),
@@ -107,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: RaisedButton(
-                    color: Colors.blueAccent,
+                      color: Colors.blueAccent,
                       child: Align(
                         child: Text(
                           "LET'S ROCK",
