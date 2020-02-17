@@ -89,15 +89,17 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 Text(
                   'ENTER YOUR TEAM NAME GEEK',
-                  style: GoogleFonts.raleway(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple),
+                  style: GoogleFonts.lato(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurple,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 TextField(
-                    style: GoogleFonts.raleway(
-                      fontSize: 20,
+                    style: GoogleFonts.lato(
+                      fontSize: 22,
+                      color: Color.fromRGBO(50,50, 50, 0.75),
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(hintText: "Titanic Swim Team"),
@@ -105,8 +107,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: RaisedButton(
+                    color: Colors.blueAccent,
                       child: Align(
-                        child: Text("LET'S ROCK"),
+                        child: Text(
+                          "LET'S ROCK",
+                          style: GoogleFonts.raleway(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                       onPressed: () {
                         _setTeamName(teamNameController, teamName, context);
