@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _showBottomNavigation(context) {
     showModalBottomSheet(
-      backgroundColor: Colors.black38,
+      backgroundColor: Colors.black26,
         context: context,
         builder: (_) {
           return Container(
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black12,
               elevation: 10,
               child: Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(25),
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 18,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 20),
                         ],
                       );
                     }).toList()

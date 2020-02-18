@@ -1,10 +1,11 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:audioplayers/audio_cache.dart';
 
 class Button extends StatefulWidget {
   final teamName;
   final showBottomNavigation;
-  // final buzzerStatus;
 
   Button(this.teamName, this.showBottomNavigation);
 
@@ -13,15 +14,17 @@ class Button extends StatefulWidget {
 }
 
 class _ButtonState extends State<Button> {
-   final DatabaseReference database = FirebaseDatabase.instance.reference();
+  final DatabaseReference database = FirebaseDatabase.instance.reference();
+    void playSound() {
+    AudioCache cache = new AudioCache();
+    cache.play('lib/assets/Buzzer_sound.mp3');
+  }
 
   sendData(String teamName) {
-    //   database.child('buzzerzStatus').once().then((DataSnapshot snapshot) {
-    // print('Data : ${snapshot.value}');
-  // });
-     database.child(teamName).set({
-    'time': DateTime.now().toString(),
-  });
+    playSound();
+    database.child(teamName).set({
+      'time': DateTime.now().toString(),
+    });
   }
 
   Future<bool> _onBackPressed() {
@@ -54,7 +57,7 @@ class _ButtonState extends State<Button> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "TEAM: " + widget.teamName,
+          widget.teamName,
           overflow: TextOverflow.fade,
         ),
         actions: <Widget>[

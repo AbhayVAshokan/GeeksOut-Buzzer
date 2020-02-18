@@ -20,6 +20,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "audioplayers",
+      "rootUri": "file:///home/abhayvashokan/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers-0.14.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///home/abhayvashokan/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-1.0.5",
       "packageUri": "lib/",
@@ -260,6 +266,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "uuid",
+      "rootUri": "file:///home/abhayvashokan/flutter/.pub-cache/hosted/pub.dartlang.org/uuid-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///home/abhayvashokan/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.0.8",
       "packageUri": "lib/",
@@ -278,7 +290,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-02-17T14:07:42.854245Z",
+  "generated": "2020-02-18T00:40:41.744239Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }
