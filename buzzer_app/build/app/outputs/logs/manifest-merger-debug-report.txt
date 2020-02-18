@@ -10,6 +10,7 @@ MERGED from [:cloud_firestore] /home/abhayvashokan/Productivity/Projects/GeeksOu
 MERGED from [:firebase_database] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core_web] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/firebase_core_web/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:audioplayers] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/audioplayers/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:path_provider] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-analytics:17.2.2] /home/abhayvashokan/.gradle/caches/transforms-2/files-2.1/3fc948a21faecdbd7a0b26b39dcba6cc/firebase-analytics-17.2.2/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-measurement:17.2.2] /home/abhayvashokan/.gradle/caches/transforms-2/files-2.1/55bd6c046f9eee8a957701ba6c56fde3/play-services-measurement-17.2.2/AndroidManifest.xml:17:1-55:12
@@ -198,6 +199,8 @@ MERGED from [:firebase_core] /home/abhayvashokan/Productivity/Projects/GeeksOut-
 MERGED from [:firebase_core] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core_web] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/firebase_core_web/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core_web] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/firebase_core_web/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:audioplayers] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/audioplayers/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-44
+MERGED from [:audioplayers] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/audioplayers/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-44
 MERGED from [:path_provider] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /home/abhayvashokan/Productivity/Projects/GeeksOut-Buzzer/buzzer_app/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-analytics:17.2.2] /home/abhayvashokan/.gradle/caches/transforms-2/files-2.1/3fc948a21faecdbd7a0b26b39dcba6cc/firebase-analytics-17.2.2/AndroidManifest.xml:5:5-44

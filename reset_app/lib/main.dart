@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
      decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("lib/reset_background.jpg"),
+            image: AssetImage("lib/assets/deadpool.jpg"),
             fit: BoxFit.cover,
           ),
         ),
