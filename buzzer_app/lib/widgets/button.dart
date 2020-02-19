@@ -42,7 +42,7 @@ class _ButtonState extends State<Button> with WidgetsBindingObserver {
       disQualifiedState = 1;
     });
 
-    database.child(widget.teamName).set({
+    database.child('pressedTeams').child(widget.teamName).set({
       'time': "Disqualified",
     });
   }
@@ -54,7 +54,7 @@ class _ButtonState extends State<Button> with WidgetsBindingObserver {
 
   sendData(String teamName) {
     playSound();
-    database.child(teamName).set({
+    database.child('pressedTeams').child(teamName).set({
       'time': DateTime.now().toString(),
     });
   }
