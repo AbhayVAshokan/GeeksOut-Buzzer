@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import './get_firebase_data.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,34 +23,34 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final DatabaseReference database = FirebaseDatabase.instance.reference();
-  List<TeamDetail> listItems = [];
-  var teamName;
+  var teamData;
+  List<String> teamName = [];
+  List<DateTime> teamTime = [];
 
-  Future<List<TeamDetail>> firebaseCalls(
-      DatabaseReference databaseReference) async {
-    TeamList teamList;
-    DataSnapshot dataSnapshot = await databaseReference.once();
-    Map<dynamic, dynamic> jsonResponse = dataSnapshot.value[0]['content'];
-    teamList = new TeamList.fromJSON(jsonResponse);
-    listItems.addAll(teamList.teamData);
-
-    return listItems;
-  }
-
-  void deleteData() {
+  void deleteData(teamName, teamTime) {
     database.child('pressedTeams').remove();
+    setState(() {
+      teamName.clear();
+      teamTime.clear();
+    });
   }
 
-  void getData() {
+  void getData(teamName, teamTime) {
     database.once().then((DataSnapshot snapshot) {
-      print('Data : ${snapshot.value}');
+      print(
+          'Data : ${snapshot.value} \n ${snapshot.value['pressedTeams'].length}');
       setState(() {
-        teamName = snapshot.value;
+        teamName.clear();
+        teamTime.clear();
+
+        teamData = snapshot.value['pressedTeams'];
+        teamData.forEach((name, date) {
+          teamName.add(name);
+          teamTime.add(DateTime.parse(date['time']));
+        });
       });
+      print('updated list: $teamName, $teamTime');
     });
-
-    print(teamName.runtimeType);
-
     print('pressed refreshed');
   }
 
@@ -68,37 +67,96 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.height * 0.75,
+            width: MediaQuery.of(context).size.width * 0.9,
             color: Color.fromRGBO(10, 10, 10, 30),
-            child: Column(
-              children: <Widget>[
-                // ListView.builder(itemBuilder: null),
-                SizedBox(height: 35),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                      width: 120,
-                      child: RaisedButton(
-                          color: Colors.green,
-                          child: Text(
-                            'REFRESH',
-                            style: GoogleFonts.lato(fontSize: 20),
-                          ),
-                          onPressed: getData),
-                    ),
-                    Container(
-                      width: 120,
-                      child: RaisedButton(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          ...teamName.map((name) {
+                            return Column(
+                              children: <Widget>[
+                                Card(
+                                  color: Color.fromRGBO(252, 190, 3, 0.5),
+                                  child: Container(
+                                    height: 20,
+                                    width: MediaQuery.of(context).size.width * 0.4,
+                                    margin: EdgeInsets.all(10),
+                                    child: Text(
+                                      name,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.raleway(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                              ],
+                            );
+                          }).toList()
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ...teamTime.map((time) {
+                            return Column(
+                              children: <Widget>[
+                                Card(
+                                  child: Container(
+                                    height: 20,
+                                    width: MediaQuery.of(context).size.width * 0.25,
+                                    margin: EdgeInsets.all(10),
+                                    child: Text(
+                                      time.toString().compareTo("Disqualified") == 0 ? "Disqualified" : DateFormat("h : m : s.ms").format(time),
+                                      style: GoogleFonts.lato(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                              ],
+                            );
+                          }).toList()
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Container(
+                        width: 120,
+                        child: RaisedButton(
+                            color: Colors.green,
+                            child: Text(
+                              'REFRESH',
+                              style: GoogleFonts.lato(fontSize: 20),
+                            ),
+                            onPressed: () => getData(teamName, teamTime)),
+                      ),
+                      Container(
+                        width: 120,
+                        child: RaisedButton(
                           color: Colors.red,
                           child: Text('RESET',
                               style: GoogleFonts.lato(fontSize: 20)),
-                          onPressed: deleteData),
-                    ),
-                  ],
-                ),
-              ],
+                          onPressed: () => deleteData(teamName, teamTime),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
