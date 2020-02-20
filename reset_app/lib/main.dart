@@ -23,7 +23,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final DatabaseReference database = FirebaseDatabase.instance.reference();
-  var teamData;
+  var teamData, fastestIndex = -1;
+  var fastestTime = DateTime(2000, 1, 1, 1, 1, 1, 1, 1);
   List<String> teamName = [];
   List<DateTime> teamTime = [];
 
@@ -32,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       teamName.clear();
       teamTime.clear();
+      fastestIndex = -1;
+      fastestTime = DateTime(2000, 1, 1, 1, 1, 1, 1, 1);
     });
   }
 
@@ -46,10 +49,32 @@ class _HomeScreenState extends State<HomeScreen> {
         teamData = snapshot.value['pressedTeams'];
         teamData.forEach((name, date) {
           teamName.add(name);
-          teamTime.add(DateTime.parse(date['time']));
+          if (date['time'].compareTo("Disqualified") == 0) {
+            teamTime.add(DateTime.now().add(Duration(days: 5)));
+          } else {
+            teamTime.add(DateTime.parse(date['time']));
+          }
         });
+
+        for (int i = 0;
+            i < teamData.length &&
+                teamTime[i].isBefore(DateTime.now().add(Duration(days: 2)));
+            i++) {
+          print('index: $i');
+          if (fastestIndex == -1) {
+            setState(() {
+              fastestIndex = i;
+              fastestTime = teamTime[i];
+            });
+          } else if (teamTime[i].isBefore(teamTime[fastestIndex])) {
+            setState(() {
+              fastestIndex = i;
+              fastestTime = teamTime[i];
+            });
+          }
+        }
       });
-      print('updated list: $teamName, $teamTime');
+      print('updated list: $teamName, $teamTime, $fastestIndex');
     });
     print('pressed refreshed');
   }
@@ -84,7 +109,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: Color.fromRGBO(252, 190, 3, 0.5),
                                   child: Container(
                                     height: 20,
-                                    width: MediaQuery.of(context).size.width * 0.4,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
                                     margin: EdgeInsets.all(10),
                                     child: Text(
                                       name,
@@ -109,20 +135,71 @@ class _HomeScreenState extends State<HomeScreen> {
                           ...teamTime.map((time) {
                             return Column(
                               children: <Widget>[
-                                Card(
-                                  child: Container(
-                                    height: 20,
-                                    width: MediaQuery.of(context).size.width * 0.25,
-                                    margin: EdgeInsets.all(10),
-                                    child: Text(
-                                      time.toString().compareTo("Disqualified") == 0 ? "Disqualified" : DateFormat("h : m : s.ms").format(time),
-                                      style: GoogleFonts.lato(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                time.isAfter(
+                                        DateTime.now().add(Duration(days: 2)))
+                                    ? Card(
+                                        color: Color.fromRGBO(255, 0, 0, 0.3),
+                                        child: Container(
+                                          height: 20,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.25,
+                                          margin: EdgeInsets.all(10),
+                                          child: Center(
+                                            child: Text(
+                                              "DISQUALIFIED",
+                                              style: GoogleFonts.lato(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : time.isAtSameMomentAs(fastestTime)
+                                        ? Card(
+                                            color:
+                                                Color.fromRGBO(26, 158, 0, 0.3),
+                                            child: Container(
+                                              height: 20,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.25,
+                                              margin: EdgeInsets.all(10),
+                                              child: Center(
+                                                child: Text(
+                                                  DateFormat("h : m : s.ms")
+                                                      .format(time),
+                                                  style: GoogleFonts.lato(
+                                                    color: Colors.white,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Card(
+                                            child: Container(
+                                              height: 20,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.25,
+                                              margin: EdgeInsets.all(10),
+                                              child: Center(
+                                                child: Text(
+                                                  DateFormat("h : m : s.ms")
+                                                      .format(time),
+                                                  style: GoogleFonts.lato(
+                                                    color: Colors.white,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                 SizedBox(height: 20),
                               ],
                             );
