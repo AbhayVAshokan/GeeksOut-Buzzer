@@ -17,11 +17,21 @@ class Button extends StatefulWidget {
 class _ButtonState extends State<Button> with WidgetsBindingObserver {
   final DatabaseReference database = FirebaseDatabase.instance.reference();
   int disQualifiedState = 0;
+  String localFilePath;
+
+  AudioPlayer advancedPlayer;
+  AudioCache audioCache;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    initPlayer();
+  }
+
+  void initPlayer() {
+    advancedPlayer = new AudioPlayer();
+    audioCache = new AudioCache(fixedPlayer: advancedPlayer);
   }
 
   @override
@@ -47,13 +57,7 @@ class _ButtonState extends State<Button> with WidgetsBindingObserver {
     });
   }
 
-  void playSound() {
-    AudioCache cache = new AudioCache();
-    cache.play('lib/assets/Buzzer_sound.mp3');
-  }
-
   sendData(String teamName) {
-    playSound();
     database.child('pressedTeams').child(teamName).set({
       'time': DateTime.now().toString(),
     });
@@ -112,6 +116,7 @@ class _ButtonState extends State<Button> with WidgetsBindingObserver {
                         height: MediaQuery.of(context).size.width * 0.95,
                       ),
                       onPressed: () {
+                        audioCache.play('Buzzer_sound.mp3');
                         sendData(widget.teamName);
                       },
                     )
